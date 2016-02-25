@@ -1,0 +1,140 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="300dp"
+    android:orientation="vertical"
+    android:gravity="center">
+
+    <GridLayout
+        android:layout_width="340dp"
+        android:layout_height="wrap_content"
+        android:rowCount="5"
+        android:columnCount="3"
+        android:foregroundGravity="fill"
+        android:columnOrderPreserved="false"
+        android:padding="10dp"
+        android:layout_gravity="center">
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1"
+            android:id="@+id/button1"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2"
+            android:id="@+id/button2"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3"
+            android:id="@+id/button3"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="4"
+            android:id="@+id/button4"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="5"
+            android:id="@+id/button5"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="6"
+            android:id="@+id/button6"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="7"
+            android:id="@+id/button7"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="8"
+            android:id="@+id/button8"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="9"
+            android:id="@+id/button9"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="#"
+            android:id="@+id/buttonJing"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="0"
+            android:id="@+id/button0"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="*"
+            android:id="@+id/buttonMi"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="通话统计"
+            android:id="@+id/buttonCount"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="call"
+            android:id="@+id/buttonCall"
+            android:background="@drawable/btn_selector" />
+
+        <Button
+            style="@style/phoneButton"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="删除"
+            android:id="@+id/buttonDelete"
+            android:layout_alignTop="@+id/phoneNumber_tv"
+            android:layout_alignEnd="@+id/phoneNumber_tv"
+            android:background="@drawable/btn_selector" />
+    </GridLayout>
+</LinearLayout>
