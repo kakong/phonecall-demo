@@ -12,13 +12,16 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.TextView;
 
+import java.text.SimpleDateFormat;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 public class ContactViewAdapter extends RecyclerView.Adapter<ContactViewAdapter.ViewHolder> {
 
     private Context mContext;
     private List<RecordEntity> mRecordList;
+    public int listlenght=15;
     public ContactViewAdapter(Context mContext) {
         this.mContext = mContext;
     }
@@ -32,25 +35,33 @@ public class ContactViewAdapter extends RecyclerView.Adapter<ContactViewAdapter.
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
 
-    public void onBindViewHolder(final ContactViewAdapter.ViewHolder holder, int position) {
-        final View view = holder.mView;
+    public void onBindViewHolder(final ContactViewAdapter.ViewHolder holders, int i) {
+       // final View view = holder.mView;
+        //ViewModel item = items.get(position);
+        // ViewHolder holders = (ViewHolder) holder;
         getlianxixinxi();
-        TextView name = (TextView)view.findViewById(R.id.hadcontact_coustomer_name);
-        TextView phonenumber = (TextView)view.findViewById(R.id.hadcontact_coustomer_num);
-        TextView duration = (TextView)view.findViewById(R.id.hadcontact_coustomer_duration);
-        TextView lDate = (TextView)view.findViewById(R.id.hadcontact_coustomer_time);
-        //mRecordList.get(0);
-        if(mRecordList.get(0).getName()==null) {
-            name.setText("未知");
+        holders.position = 0;
+        RecordEntity recordEntity = mRecordList.get(i);
+        if(recordEntity.getName()==null) {
+            holders.name.setText("未知");
         }
         else {
-            name.setText(mRecordList.get(0).getName().toString());
+            holders.name.setText(recordEntity.getName().toString());
         }
-        phonenumber.setText(mRecordList.get(0).getNumber().toString());
+        holders.phonenumber.setText(recordEntity.getNumber().toString());
 
-        duration.setText(""+mRecordList.get(0).getDuration());
+        holders.duration.setText(""+ recordEntity.getDuration()+"秒");
 
-        lDate.setText(""+mRecordList.get(0).getlDate());
+        holders.lDate.setText("" + recordEntity.getlDate());
+        switch (recordEntity.getType()){
+            case  0:holders.type.setText("打进");break;
+            case  1:holders.type.setText("打出");break;
+            case  2:holders.type.setText("未接");break;
+            case  3:holders.type.setText("响铃");break;
+            default:holders.type.setText("");
+        }
+
+
 
 //        view.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -72,32 +83,32 @@ public class ContactViewAdapter extends RecyclerView.Adapter<ContactViewAdapter.
         Cursor cursor = null;
         try {
             cursor = contentResolver.query(
-                    // CallLog.Calls.CONTENT_URI, Columns, null,
-                    // null,CallLog.Calls.DATE+" desc");
                     CallLog.Calls.CONTENT_URI, null, null, null,
                     CallLog.Calls.DATE + " desc");
             if (cursor == null){
 
             }
 
-             mRecordList = new ArrayList<RecordEntity>();
-            while (cursor.moveToNext()) {
-                RecordEntity record = new RecordEntity();
-                record.name = cursor.getString(cursor
-                        .getColumnIndex(CallLog.Calls.CACHED_NAME));
-                record.number = cursor.getString(cursor
-                        .getColumnIndex(CallLog.Calls.NUMBER));
-                record.type = cursor.getInt(cursor
-                        .getColumnIndex(CallLog.Calls.TYPE));
-                record.lDate = cursor.getLong(cursor
-                        .getColumnIndex(CallLog.Calls.DATE));
-                record.duration = cursor.getLong(cursor
-                        .getColumnIndex(CallLog.Calls.DURATION));
-                record._new = cursor.getInt(cursor
-                        .getColumnIndex(CallLog.Calls.NEW));
-//                lastnumber += record.toString();
-//                record_tv.setText(lastnumber);
-                mRecordList.add(record);
+            mRecordList = new ArrayList<RecordEntity>();
+            SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+            for(int i=0;i<listlenght;i++) {
+                while (cursor.moveToNext()) {
+                    RecordEntity record = new RecordEntity();
+                    record.name = cursor.getString(cursor
+                            .getColumnIndex(CallLog.Calls.CACHED_NAME));
+                    record.number = cursor.getString(cursor
+                            .getColumnIndex(CallLog.Calls.NUMBER));
+                    record.type = cursor.getInt(cursor
+                            .getColumnIndex(CallLog.Calls.TYPE));
+                    Date date = new Date(Long.parseLong(cursor.getString(cursor
+                            .getColumnIndex(CallLog.Calls.DATE))));
+                    record.lDate = sdf.format(date);
+                    record.duration = cursor.getLong(cursor
+                            .getColumnIndex(CallLog.Calls.DURATION));
+                    record._new = cursor.getInt(cursor
+                            .getColumnIndex(CallLog.Calls.NEW));
+                    mRecordList.add(record);
+                }
             }
         } finally {
             if (cursor != null) {
@@ -110,11 +121,19 @@ public class ContactViewAdapter extends RecyclerView.Adapter<ContactViewAdapter.
         return 10;
     }
 
-    public static class ViewHolder extends RecyclerView.ViewHolder {
-        public final View mView;
+    public class ViewHolder extends RecyclerView.ViewHolder {
+        //public final View mView;
+        public TextView name,phonenumber,duration,lDate,type;
+        public int position;
         public ViewHolder(View view) {
             super(view);
-            mView = view;
+            name = (TextView)view.findViewById(R.id.hadcontact_coustomer_name);
+            phonenumber = (TextView)view.findViewById(R.id.hadcontact_coustomer_num);
+            duration = (TextView)view.findViewById(R.id.hadcontact_coustomer_duration);
+            lDate = (TextView)view.findViewById(R.id.hadcontact_coustomer_time);
+            type =(TextView)view.findViewById(R.id.hadcontact_coustomer_type);
+            //mRecordList.get(0);
+
         }
     }
 }

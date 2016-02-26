@@ -8,7 +8,7 @@ public class RecordEntity {
     String name;
     String number;
     int type;
-    long lDate;
+    String lDate;
     long duration;
     int _new;
 
@@ -36,11 +36,11 @@ public class RecordEntity {
         this.type = type;
     }
 
-    public long getlDate() {
+    public String getlDate() {
         return lDate;
     }
 
-    public void setlDate(long lDate) {
+    public void setlDate(String lDate) {
         this.lDate = lDate;
     }
 

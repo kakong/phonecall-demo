@@ -66,11 +66,13 @@ public class CallFragment extends Fragment implements View.OnClickListener {
         btCall.setOnClickListener(new View.OnClickListener(){
             public void onClick(View v) {
                 //获取电话号码
-                String mobile = number;
-                //意图对象 1.意图的动作用指明交给的那一个应用 2.传输数据
-                Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mobile));
-                //把意图传播给操作系统
-                 startActivity(intent);
+                String mobile = phoneNumber_et.getText().toString();
+                if(!mobile.equals("")) {
+                    //意图对象 1.意图的动作用指明交给的那一个应用 2.传输数据
+                    Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + mobile));
+                    //把意图传播给操作系统
+                    startActivity(intent);
+                }
 //                TelephonyManager telephonyManager = (TelephonyManager)getSystemService(Context.TELEPHONY_SERVICE);
 //                telephonyManager.listen(new PhoneListener(), PhoneStateListener.LISTEN_CALL_STATE);
             }
