@@ -10,7 +10,7 @@
         android:label="@string/app_name"
         android:theme="@style/Theme.DesignDemo">
         <activity
-            android:name="com.zjk.phonecall.MainActivity"
+            android:name="com.zjk.phonecall.activity.MainActivity"
             android:label="@string/app_name">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN"/>
@@ -19,7 +19,7 @@
             </intent-filter>
         </activity>
 
-        <activity android:name="com.zjk.phonecall.DetailActivity"/>
+        <activity android:name="com.zjk.phonecall.activity.DetailActivity"/>
     </application>
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
