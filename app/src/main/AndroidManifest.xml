@@ -22,7 +22,10 @@
 
         <activity android:name="com.zjk.phonecall.activity.DetailActivity"/>
     </application>
-    <provider android:name="com.zjk.phonecall.provider.ContactProvider" android:authorities="com.zjk.phonecall.provider.Contact" />
+    <!--<provider android:name="com.zjk.phonecall.provider.ContactProvider" android:authorities="com.zjk.phonecall.provider.CONTACT" />-->
+    <!--<provider android:name="com.zjk.phonecall.provider.UsersProvider" android:authorities="com.zjk.phonecall.provider.CONTACT" />-->
+    <!--<provider android:name="com.zjk.phonecall.provider.ContactProvider" android:authorities="com.zjk.phonecall.provider.CONTACT" />-->
+    <provider android:name="com.zjk.phonecall.provider.ContactProvider" android:authorities="com.zjk.phonecall.provider.CONTACT" />
     <uses-permission android:name="android.permission.CALL_PHONE" />
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.WRITE_CALL_LOG"/>

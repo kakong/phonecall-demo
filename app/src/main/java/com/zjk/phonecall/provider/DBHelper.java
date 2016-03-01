@@ -3,6 +3,7 @@ package com.zjk.phonecall.provider;
 import android.content.Context;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 /**
  * Created by zhongjiakang on 16/2/29.
@@ -14,17 +15,21 @@ public class DBHelper extends SQLiteOpenHelper {
     public static final String TABLES_CUSTOMER = "customer";
     public static final  String TABLES_CONTACTDETAIL ="contactdetail";
     public static final  String TABLES_CONTACT ="contact";
+    private static final String TAG = "DBHelper";
     public DBHelper(Context context) {
+
         super(context, DATABASE_NAME,null, DATABASE_VERSION);
+        Log.i(TAG, "DATABASE_VERSION=" + DATABASE_VERSION);
     }
 
     @Override
     public void onCreate(SQLiteDatabase db) {
-        db.execSQL("CREATE TABLE"+TABLES_USER+"("
-                + Users._ID + " INTEGER PRIMARY KEY,"
-                + Users.NAME + "TEXT,"
-                + Users.PSW + "TEXT"
-                + ");");
+        Log.i(TAG, "onCreate(SQLiteDatabase db)");
+//        db.execSQL("CREATE TABLE"+TABLES_USER+"("
+//                + Users._ID + " INTEGER PRIMARY KEY,"
+//                + Users.NAME + "TEXT,"
+//                + Users.PSW + "TEXT"
+//                + ");");
         db.execSQL("CREATE TABLE"+TABLES_CONTACT+"("
                 + Contact._ID + " INTEGER PRIMARY KEY,"
                 + Contact.NAME + "TEXT,"
@@ -33,23 +38,23 @@ public class DBHelper extends SQLiteOpenHelper {
                 + Contact.DATE + "TEXT,"
                 + Contact.DURATION + "INTEGER"
                 + ");");
-        db.execSQL("CREATE TABLE"+TABLES_CUSTOMER+"("
-                + Coustomers._ID + " INTEGER PRIMARY KEY,"
-                + Coustomers.NAME + "TEXT,"
-                + Coustomers.SEX + "TEXT"
-                + Coustomers.NUMBER + "TEXT"
-                + ");");
-        db.execSQL("CREATE TABLE"+TABLES_CONTACTDETAIL+"("
-                + ContactDetail._ID + " INTEGER PRIMARY KEY,"
-                + ContactDetail.USERID + "INTEGER,"
-                + ContactDetail.COUSTOMERID + "INTEGER"
-                + ContactDetail.USERNAME + "TEXT,"
-                + ContactDetail.COUSTOMERNAME + "TEXT"
-                + ContactDetail.PHONENUMBER + "TEXT,"
-                + ContactDetail.TYPE + "INTEGER"
-                + ContactDetail.DATE + "TEXT,"
-                + ContactDetail.DURATION + "INTEGER"
-                + ");");
+//        db.execSQL("CREATE TABLE"+TABLES_CUSTOMER+"("
+//                + Coustomers._ID + " INTEGER PRIMARY KEY,"
+//                + Coustomers.NAME + "TEXT,"
+//                + Coustomers.SEX + "TEXT"
+//                + Coustomers.NUMBER + "TEXT"
+//                + ");");
+//        db.execSQL("CREATE TABLE"+TABLES_CONTACTDETAIL+"("
+//                + ContactDetail._ID + " INTEGER PRIMARY KEY,"
+//                + ContactDetail.USERID + "INTEGER,"
+//                + ContactDetail.COUSTOMERID + "INTEGER"
+//                + ContactDetail.USERNAME + "TEXT,"
+//                + ContactDetail.COUSTOMERNAME + "TEXT"
+//                + ContactDetail.PHONENUMBER + "TEXT,"
+//                + ContactDetail.TYPE + "INTEGER"
+//                + ContactDetail.DATE + "TEXT,"
+//                + ContactDetail.DURATION + "INTEGER"
+//                + ");");
     }
 
     @Override
@@ -57,6 +62,7 @@ public class DBHelper extends SQLiteOpenHelper {
         db.execSQL("DROP TABLE IF EXISTS user");
         db.execSQL("DROP TABLE IF EXISTS customer");
         db.execSQL("DROP TABLE IF EXISTS contactdetail");
+        db.execSQL("DROP TABLE IF EXISTS contact");
 
         onCreate(db);
     }
