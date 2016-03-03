@@ -7,7 +7,7 @@ import android.provider.BaseColumns;
  * Created by zhongjiakang on 16/2/29.
  */
 public final class ContactDetail implements BaseColumns {
-    public static final String AUTHORITY = "com.zjk.phonecall.provider.CONTACTDETAIL";
+    public static final String AUTHORITY = "com.zjk.phonecall.provider.ContactDetailProvider";
     public static final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/contactdetail");
     public static final String DEFAULT_SORT_ORDER = "id DESC";
     public static final String ID = "id";

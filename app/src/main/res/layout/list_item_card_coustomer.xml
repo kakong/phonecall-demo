@@ -44,7 +44,7 @@
             </RelativeLayout>
 
             <LinearLayout
-                android:layout_width="184dp"
+                android:layout_width="204dp"
                 android:layout_height="73dp"
                 android:gravity="left|center"
                 android:orientation="vertical"
@@ -71,6 +71,18 @@
                         android:layout_alignParentTop="true"
                         android:layout_toRightOf="@+id/textView"
                         android:layout_toEndOf="@+id/textView" />
+
+                    <TextView
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:text="先生"
+                        android:id="@+id/card_coustomer_sex"
+                        android:layout_gravity="center_horizontal"
+                        android:layout_alignParentTop="true"
+                        android:layout_toRightOf="@+id/card_coustomer_name_tv"
+                        android:layout_toEndOf="@+id/card_coustomer_name_tv"
+                        android:layout_marginLeft="10dp"
+                        android:layout_marginStart="17dp" />
 
                 </RelativeLayout>
 

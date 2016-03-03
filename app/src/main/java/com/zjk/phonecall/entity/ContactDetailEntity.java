@@ -8,6 +8,11 @@ public class ContactDetailEntity {
     public int userId;
     public int coustomerId;
     public String userName;
+    public String coustomerName;
+    public String phoneNumber;
+    public int type;
+    public String lDate;
+    public long duration;
 
     public String getCoustomerName() {
         return coustomerName;
@@ -17,11 +22,6 @@ public class ContactDetailEntity {
         this.coustomerName = coustomerName;
     }
 
-    public String coustomerName;
-    public String phoneNumber;
-    public int type;
-    public String lDate;
-    public long duration;
 
     public int getType() {
         return type;

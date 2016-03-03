@@ -6,9 +6,9 @@ import android.provider.BaseColumns;
 /**
  * Created by zhongjiakang on 16/3/1.
  */
-public final class Contact implements BaseColumns {
-    public static  final  String AUTHORITY = "com.zjk.phonecall.provider.CONTACT";
-    public static  final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/contact");
+public final class Contacts implements BaseColumns {
+    public static  final  String AUTHORITY = "com.zjk.phonecall.provider.ContactsProvider";
+    public static  final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/contacts");
     public static String DEFAULT_SORT_ORDER = "id DESC";
     public static final String NAME = "name";
     public static final String PHONENUMBER = "phonenumber";

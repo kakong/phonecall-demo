@@ -1,6 +1,5 @@
 package com.zjk.phonecall.provider;
 
-import android.content.ContentProvider;
 import android.content.ContentUris;
 import android.content.ContentValues;
 import android.content.UriMatcher;
@@ -14,31 +13,33 @@ import android.text.TextUtils;
 import java.util.HashMap;
 
 /**
- * Created by zhongjiakang on 16/3/1.
+ * Created by zhongjiakang on 16/3/2.
  */
-public class ContactProvider extends ContentProvider {
+public class ContactDetailProvider extends ContactProvider{
     private  DBHelper dbHelper;
     private static final UriMatcher sUriMatcher;
-    private  static final int CONTACT = 1;
-    private  static final int CONTACT_ID = 2;
+    private  static final int CONTACTDETAIL = 1;
+    private  static final int CONTACTDETAIL_ID = 2;
 
     // 查询列集合
-    private static HashMap<String, String> userProjectionMap;
+    private static HashMap<String, String> tblProjectionMap;
     static {
         // Uri配合工具类
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
-        sUriMatcher.addURI(Contacts.AUTHORITY, "contacts", CONTACT);
-        sUriMatcher.addURI(Contacts.AUTHORITY, "contacts/#", CONTACT_ID);
+        sUriMatcher.addURI(ContactDetail.AUTHORITY, "contactdetails", CONTACTDETAIL);
+        sUriMatcher.addURI(ContactDetail.AUTHORITY, "contactdetails/#", CONTACTDETAIL_ID);
         // 实例化查询列集合
-        userProjectionMap = new HashMap<String, String>();
+        tblProjectionMap = new HashMap<String, String>();
         // 添加查询列
-        userProjectionMap.put(Contacts._ID, Contacts._ID);
-        userProjectionMap.put(Contacts.NAME, Contacts.NAME);
-        userProjectionMap.put(Contacts.PHONENUMBER, Contacts.PHONENUMBER);
-        userProjectionMap.put(Contacts.DATE, Contacts.DATE);
-        userProjectionMap.put(Contacts.DURATION, Contacts.DURATION);
-        userProjectionMap.put(Contacts.TYPE, Contacts.TYPE);
-
+        tblProjectionMap.put(ContactDetail._ID, ContactDetail._ID);
+        tblProjectionMap.put(ContactDetail.USERID, ContactDetail.USERID);
+        tblProjectionMap.put(ContactDetail.USERNAME, ContactDetail.USERNAME);
+        tblProjectionMap.put(ContactDetail.COUSTOMERID, ContactDetail.COUSTOMERID);
+        tblProjectionMap.put(ContactDetail.COUSTOMERNAME, ContactDetail.COUSTOMERNAME);
+        tblProjectionMap.put(ContactDetail.TYPE, ContactDetail.TYPE);
+        tblProjectionMap.put(ContactDetail.DURATION, ContactDetail.DURATION);
+        tblProjectionMap.put(ContactDetail.DATE, ContactDetail.DATE);
+        tblProjectionMap.put(ContactDetail.PHONENUMBER, ContactDetail.PHONENUMBER);
     }
 
     // 创建时候调用
@@ -55,15 +56,15 @@ public class ContactProvider extends ContentProvider {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         switch (sUriMatcher.match(uri)) {
             // 查询所有
-            case CONTACT:
-                qb.setTables(DBHelper.TABLES_CONTACT);
-                qb.setProjectionMap(userProjectionMap);
+            case CONTACTDETAIL:
+                qb.setTables(DBHelper.TABLES_CONTACTDETAIL);
+                qb.setProjectionMap(tblProjectionMap);
                 break;
             // 根据ID查询
-            case CONTACT_ID:
-                qb.setTables(DBHelper.TABLES_CONTACT);
-                qb.setProjectionMap(userProjectionMap);
-                qb.appendWhere(Users._ID + "=" + uri.getPathSegments().get(1));
+            case CONTACTDETAIL_ID:
+                qb.setTables(DBHelper.TABLES_CONTACTDETAIL);
+                qb.setProjectionMap(tblProjectionMap);
+                qb.appendWhere(ContactDetail._ID + "=" + uri.getPathSegments().get(1));
                 break;
             default:
                 throw new IllegalArgumentException("Uri错误！ " + uri);
@@ -72,7 +73,7 @@ public class ContactProvider extends ContentProvider {
         // 使用默认排序
         String orderBy;
         if (TextUtils.isEmpty(sortOrder)) {
-            orderBy = Users.DEFAULT_SORT_ORDER;
+            orderBy = ContactDetail.DEFAULT_SORT_ORDER;
         } else {
             orderBy = sortOrder;
         }
@@ -97,10 +98,10 @@ public class ContactProvider extends ContentProvider {
         // 获取数据库实例
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         // 插入数据，返回行ID
-        long rowId = db.insert(DBHelper.TABLES_CONTACT,null, values);
+        long rowId = db.insert(DBHelper.TABLES_CONTACTDETAIL,null, values);
         // 如果插入成功返回uri
         if (rowId > 0) {
-            Uri empUri = ContentUris.withAppendedId(Contacts.CONTENT_URI, rowId);
+            Uri empUri = ContentUris.withAppendedId(ContactDetail.CONTENT_URI, rowId);
             getContext().getContentResolver().notifyChange(empUri, null);
             return empUri;
         }
@@ -111,7 +112,7 @@ public class ContactProvider extends ContentProvider {
     public int delete(Uri uri, String selection, String[] selectionArgs) {
         //获得数据库实例
         SQLiteDatabase db = dbHelper.getWritableDatabase();
-        db.delete(DBHelper.TABLES_CONTACT, null, null);
+        db.delete(DBHelper.TABLES_CONTACTDETAIL, null, null);
         return 0;
     }
 
