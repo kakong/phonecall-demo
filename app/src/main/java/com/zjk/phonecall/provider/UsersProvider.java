@@ -17,13 +17,14 @@ import java.util.HashMap;
  * Created by zhongjiakang on 16/3/1.
  */
 public class UsersProvider extends ContentProvider {
-    private  DBHelper dbHelper;
+    private DBHelper dbHelper;
     private static final UriMatcher sUriMatcher;
-    private  static final int USERS = 1;
-    private  static final int USERS_ID = 2;
+    private static final int USERS = 1;
+    private static final int USERS_ID = 2;
 
     // 查询列集合
     private static HashMap<String, String> userProjectionMap;
+
     static {
         // Uri配合工具类
         sUriMatcher = new UriMatcher(UriMatcher.NO_MATCH);
@@ -46,7 +47,7 @@ public class UsersProvider extends ContentProvider {
 
     @Nullable
     @Override
-    public Cursor query(Uri uri,String[] projection, String selection,
+    public Cursor query(Uri uri, String[] projection, String selection,
                         String[] selectionArgs, String sortOrder) {
         SQLiteQueryBuilder qb = new SQLiteQueryBuilder();
         switch (sUriMatcher.match(uri)) {
@@ -93,7 +94,7 @@ public class UsersProvider extends ContentProvider {
         // 获取数据库实例
         SQLiteDatabase db = dbHelper.getWritableDatabase();
         // 插入数据，返回行ID
-        long rowId = db.insert(DBHelper.TABLES_USER,null, values);
+        long rowId = db.insert(DBHelper.TABLES_USER, null, values);
         // 如果插入成功返回uri
         if (rowId > 0) {
             Uri empUri = ContentUris.withAppendedId(Users.CONTENT_URI, rowId);

@@ -12,11 +12,11 @@ import com.zjk.phonecall.provider.DBHelper;
  * Created by zhongjiakang on 16/3/2.C
  */
 public class InsertContact {
-    public static void insertContact(RecordEntity re,Context mContext) {
-        String name="未知";
-        if(re.name!=null){
+    public static void insertContact(RecordEntity re, Context mContext) {
+        String name = "未知";
+        if (re.name != null) {
             name = re.name;
-        }else{
+        } else {
         }
         String numebr = re.number;
         int type = re.type;
@@ -31,7 +31,7 @@ public class InsertContact {
         values.put(Contacts.DURATION, duration);
         DBHelper dbh = new DBHelper(mContext);
         SQLiteDatabase sqldbInsert = dbh.getWritableDatabase();
-        sqldbInsert.insert(DBHelper.TABLES_CONTACT,null,values);
+        sqldbInsert.insert(DBHelper.TABLES_CONTACT, null, values);
 
 //
 //          ContentResolver cr = con.getContentResolver();
