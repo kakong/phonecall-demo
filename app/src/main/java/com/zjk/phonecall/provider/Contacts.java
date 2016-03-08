@@ -11,6 +11,7 @@ public final class Contacts implements BaseColumns {
     public static  final Uri CONTENT_URI = Uri.parse("content://" + AUTHORITY + "/contacts");
     public static String DEFAULT_SORT_ORDER = "id DESC";
     public static final String NAME = "name";
+    public static final String USERID = "userid";
     public static final String PHONENUMBER = "phonenumber";
     public static final String TYPE = "type";
     public static final String DATE = "date";
