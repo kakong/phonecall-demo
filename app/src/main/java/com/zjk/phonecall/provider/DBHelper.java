@@ -57,6 +57,10 @@ public class DBHelper extends SQLiteOpenHelper {
                 + ContactDetail.DATE + " TEXT,"
                 + ContactDetail.DURATION + " INTEGER"
                 + ");");
+        db.execSQL("CREATE TABLE callnumberdate (" +
+                "_id INTEGER PRIMARY KEY," +
+                " number INTEGER,date TEXT" +
+                ") ");
     }
 
     @Override

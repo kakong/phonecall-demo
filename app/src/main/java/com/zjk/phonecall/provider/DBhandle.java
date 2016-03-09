@@ -32,6 +32,37 @@ public class DBhandle {
             sqldbInsert.insert(DBHelper.TABLES_CUSTOMER, null, values);
         }
     }
+    public void insertListContact(Context context,List<RecordEntity> recordlist){
+        DBHelper dbh = new DBHelper(context);
+        SQLiteDatabase sqldbInsert = dbh.getWritableDatabase();
+        sqldbInsert.execSQL("delete from contacts ");
+        for (int i = 0; i < recordlist.size(); i++) {
+            String name = "未知";
+           RecordEntity recordEntity =  recordlist.get(i);
+            ContentValues values = new ContentValues();
+            if(recordEntity.name!=null){
+                name = recordEntity.name;
+            }else {
+                values.put(Contacts.NAME,name);
+                values.put(Contacts.PHONENUMBER,recordEntity.number);
+                values.put(Contacts.TYPE,recordEntity.type);
+                values.put(Contacts.DATE, recordEntity.lDate);
+                values.put(Contacts.DURATION,recordEntity.duration);
+                sqldbInsert.insert(DBHelper.TABLES_CONTACT, null, values);
+            }
+        }
+    }
+    public void insertNumberDate(Context mContext,String num,String Date){
+        String number = "number";
+        String date = "date";
+        String table = "callnumberdate";
+        DBHelper dbh = new DBHelper(mContext);
+        SQLiteDatabase sqldbInsert = dbh.getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(number, num);
+        values.put(date,Date);
+        sqldbInsert.insert(table,null,values);
+    }
 
     public List<CoustomerEntity> getCoustomer(Context mcontext, String sql, String[] term) {
         coustomerlist = new ArrayList<CoustomerEntity>();
@@ -74,6 +105,7 @@ public class DBhandle {
         sqldbInsert.insert(DBHelper.TABLES_CONTACT, null, values);
     }
 
+
     //从sqlite获取contact数据
     public List<RecordEntity> getRecord(Context ontext, String sql, String[] term) {
         recordlist = new ArrayList<RecordEntity>();
@@ -84,11 +116,11 @@ public class DBhandle {
         int i = cursor.getCount();
         while (cursor.moveToNext()) {
             RecordEntity recordEntity = new RecordEntity();
-            recordEntity.name = cursor.getString(cursor.getColumnIndex(Contacts.NAME));
-            recordEntity.number = cursor.getString(cursor.getColumnIndex(Contacts.PHONENUMBER));
-            recordEntity.lDate = cursor.getString(cursor.getColumnIndex(Contacts.DATE));
-            recordEntity.duration = cursor.getInt(cursor.getColumnIndex(Contacts.DURATION));
-            recordEntity.type = cursor.getInt(cursor.getColumnIndex(Contacts.TYPE));
+            recordEntity.name = cursor.getString(cursor.getColumnIndex(ContactDetail.COUSTOMERNAME));
+            recordEntity.number = cursor.getString(cursor.getColumnIndex(ContactDetail.PHONENUMBER));
+            recordEntity.lDate = cursor.getString(cursor.getColumnIndex(ContactDetail.DATE));
+            recordEntity.duration = cursor.getInt(cursor.getColumnIndex(ContactDetail.DURATION));
+            recordEntity.type = cursor.getInt(cursor.getColumnIndex(ContactDetail.TYPE));
             recordlist.add(recordEntity);
         }
         return recordlist;
