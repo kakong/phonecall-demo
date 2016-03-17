@@ -7,8 +7,6 @@ import android.net.Uri;
 import android.os.Bundle;
 import android.support.design.widget.TextInputLayout;
 import android.support.v4.app.Fragment;
-import android.telephony.PhoneStateListener;
-import android.telephony.TelephonyManager;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -127,22 +125,22 @@ public class CallFragment extends Fragment implements View.OnClickListener {
         });
         return view;
     }
-
-    public class exPhoneCallListener extends PhoneStateListener {
-        public void onCallStateChanged(int state, String incomingNumber) {
-            super.onCallStateChanged(state, incomingNumber);
-            switch (state) {
-                case TelephonyManager.CALL_STATE_IDLE ://待机
-                    break;
-                case TelephonyManager.CALL_STATE_OFFHOOK ://挂断
-                    break;
-                case TelephonyManager.CALL_STATE_RINGING ://来电话
-                    break;
-                default:
-                    break;
-            }
-        }
-    }
+//
+//    public class exPhoneCallListener extends PhoneStateListener {
+//        public void onCallStateChanged(int state, String incomingNumber) {
+//            super.onCallStateChanged(state, incomingNumber);
+//            switch (state) {
+//                case TelephonyManager.CALL_STATE_IDLE ://待机
+//                    break;
+//                case TelephonyManager.CALL_STATE_OFFHOOK ://挂断
+//                    break;
+//                case TelephonyManager.CALL_STATE_RINGING ://来电话
+//                    break;
+//                default:
+//                    break;
+//            }
+//        }
+//    }
 //    public void sbc(int i){
 //        if(i==1){
 //            insterNum(sql);

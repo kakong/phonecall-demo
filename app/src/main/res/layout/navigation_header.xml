@@ -21,6 +21,7 @@
         android:gravity="center"
         android:text="钟家康"
         android:textAppearance="@style/TextAppearance.AppCompat.Body1"
-        android:textSize="20sp"/>
+        android:textSize="20sp"
+        android:id="@+id/nav_name_tv" />
 
 </LinearLayout>

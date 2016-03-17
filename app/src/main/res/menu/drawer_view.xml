@@ -19,6 +19,10 @@
             android:id="@+id/nav_discussion"
             android:icon="@drawable/ic_forum"
             android:title="联系客人"/>
+        <item
+            android:id="@+id/nav_exit"
+            android:icon="@drawable/ic_headset"
+            android:title="退出"/>
     </group>
 
     <!--<item android:title="Version">-->

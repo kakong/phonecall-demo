@@ -32,6 +32,32 @@ public class DBhandle {
             sqldbInsert.insert(DBHelper.TABLES_CUSTOMER, null, values);
         }
     }
+    public void commitUser(Context mContext, UserEntity userEntity) {
+        DBHelper dbh = new DBHelper(mContext);
+        SQLiteDatabase sqldbInsert = dbh.getWritableDatabase();
+            ContentValues values = new ContentValues();
+            //CoustomerEntity coustomerEntity = clist.get(i);
+            values.put(Users.NAME, userEntity.name);
+            values.put(Users._ID, userEntity.id);
+            values.put(Users.PSW, userEntity.password);
+            sqldbInsert.insert(DBHelper.TABLES_USER, null, values);
+    }
+    public List<UserEntity> getUser(Context mContext) {
+        List<UserEntity> userEntities = new ArrayList<UserEntity>();
+        DBHelper dbh = new DBHelper(mContext);
+        SQLiteDatabase db = dbh.getReadableDatabase();
+        //UserEntity userEntity = new UserEntity();
+        String sql = "select * from users";
+        Cursor cursor = db.rawQuery(sql, null);
+        while (cursor.moveToNext()){
+            UserEntity userEntity1 = new UserEntity();
+            userEntity1.name = cursor.getString(cursor.getColumnIndex(Users.NAME));
+            userEntity1.id = cursor.getColumnIndex(Users._ID);
+            userEntity1.password = cursor.getString(cursor.getColumnIndex(Users.PSW));
+            userEntities.add(userEntity1);
+        }
+        return userEntities;
+    }
     public void insertListContact(Context context,List<RecordEntity> recordlist){
         DBHelper dbh = new DBHelper(context);
         SQLiteDatabase sqldbInsert = dbh.getWritableDatabase();

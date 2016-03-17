@@ -33,7 +33,8 @@ public class ContactViewAdapter extends RecyclerView.Adapter<ContactViewAdapter.
         getRecord.setCount(20);
         DBhandle dBhandle = new DBhandle();
         dBhandle.insertListContact(mContext, getRecord.getRe(mContext));
-        String sql2 = "INSERT into contactdetails (coustomername,phonenumber,type,duration,date) select c.name,c.phonenumber,c.type,c.duration,c.date from contacts c,callnumberdate a where   -strftime('%f',datetime(c.date))-strftime('%f',datetime(a.date))<2 and strftime('%f',datetime(c.date))-strftime('%f',datetime(a.date))>-2 and \n" +
+
+        String sql2 = "INSERT into contactdetails (coustomername,phonenumber,type,duration,date) select c.name,c.phonenumber,c.type,c.duration,c.date from contacts c,callnumberdate a where   -strftime('%f',datetime(c.date))-strftime('%f',datetime(a.date))<2 and strftime('%f',datetime(c.date))-strftime('%f',datetime(a.date))>-2 and " +
                 "c.phonenumber = a.number;";
         dBhandle.handle(mContext, sql2);
         String sql3 = " delete from contactdetails where date in (select date from contactdetails group by date having count(*)>1) and _id not in (select max(_id) from contactdetails group by date having count(*)>1) ";

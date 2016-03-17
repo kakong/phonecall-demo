@@ -1,6 +1,7 @@
 package com.zjk.phonecall.activity;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.design.widget.TabLayout;
@@ -13,6 +14,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+import android.widget.TextView;
 
 import com.zjk.phonecall.R;
 import com.zjk.phonecall.entity.CoustomerEntity;
@@ -31,8 +33,10 @@ public class MainActivity extends AppCompatActivity {
     private DrawerLayout mDrawerLayout;
     private ViewPager mViewPager;
     private TabLayout mTabLayout;
+    private String username;
     public List<RecordEntity> mRecordList;
     private Context mContext;
+    private TextView nav_name;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -46,6 +50,11 @@ public class MainActivity extends AppCompatActivity {
         ab.setHomeAsUpIndicator(R.drawable.ic_menu);
         ab.setDisplayHomeAsUpEnabled(true);
 
+        Intent intent1 = this.getIntent();
+        username = intent1.getStringExtra("putname");
+
+
+
         mDrawerLayout = (DrawerLayout) findViewById(R.id.dl_main_drawer);
         NavigationView navigationView =
                 (NavigationView) findViewById(R.id.nv_main_navigation);
@@ -53,20 +62,14 @@ public class MainActivity extends AppCompatActivity {
             setupDrawerContent(navigationView);
         }
         mViewPager = (ViewPager) findViewById(R.id.viewpager);
+        nav_name = (TextView)findViewById(R.id.nav_name_tv);
+
+        String ste = nav_name.getText().toString();
+        nav_name.setText(username);
         setupViewPager();
         setCoustomer(this.getBaseContext());
 
     }
-
-
-//    protected void onStop() {
-//        super.onStop();
-//        GetRecord getrecord = new GetRecord();
-//        getrecord.setCount(2);
-//        mRecordList = getrecord.getRe(mContext);
-//        DBhandle dbhandle = new DBhandle();
-//        dbhandle.insertContact(mContext, mRecordList.get(0));
-//    }
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -76,6 +79,7 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
         switch (item.getItemId()) {
             case android.R.id.home:
                 mDrawerLayout.openDrawer(GravityCompat.START);
@@ -130,21 +134,22 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
-//    protected void onRestart(){
-//        super.onRestart();
-//        GetRecord getrecord = new GetRecord();
-//        getrecord.setCount(2);
-//        mRecordList = getrecord.getRe(mContext);
-//        DBhandle dbhandle = new DBhandle();
-//        dbhandle.insertContact(mContext, mRecordList.get(0));
-//    }
     private void setupDrawerContent(NavigationView navigationView) {
         navigationView.setNavigationItemSelectedListener(
                 new NavigationView.OnNavigationItemSelectedListener() {
                     @Override
                     public boolean onNavigationItemSelected(MenuItem menuItem) {
                         menuItem.setChecked(true);
-                        mDrawerLayout.closeDrawers();
+                        String str = menuItem.getTitle().toString();
+                        if(str.equals("退出")){
+                            mDrawerLayout.closeDrawers();
+                            Intent intent = new Intent(MainActivity.this,LoginActivity.class);
+                           // intent.setAction("android.intent.action.MAIN");
+                            intent.putExtra("CancelAutoLogin",false);
+                            startActivity(intent);
+                            MainActivity.this.finish();
+                        }
+                    //    mDrawerLayout.closeDrawers();
                         return true;
                     }
                 });
